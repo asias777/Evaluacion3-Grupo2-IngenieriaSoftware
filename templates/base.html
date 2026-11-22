@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}SGRT{% endblock %} · Gestión Técnica</title><link rel="stylesheet" href="/static/style.css"></head>
+<body>
+<header class="top"><div class="container nav"><a class="brand" href="/solicitudes"><span class="logo">⚡</span> SGRT <small>Contratista eléctrica</small></a>
+{% if user %}<nav><a href="/solicitudes">Solicitudes</a>{% if user['rol']=='coordinador' %}<a href="/materiales">Materiales</a>{% endif %}</nav>
+<div class="user"><span>{{ user['nombre'] }} <em>{{user['rol']}}</em></span><form method="post" action="/logout"><input type="hidden" name="csrf" value="{{csrf}}"><button class="ghost" type="submit">Salir</button></form></div>{% endif %}</div></header>
+<main class="container">{% if request.query_params.get('msg') %}<p class="notice">✓ {{request.query_params.get('msg')}}</p>{% endif %}
+{% block content %}{% endblock %}</main><footer>Prototipo académico INACAP · Grupo 2 · Versión 3.0 · Datos de demostración</footer></body></html>
